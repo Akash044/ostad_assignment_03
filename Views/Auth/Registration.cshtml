@@ -39,6 +39,14 @@
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username/Email</label>
                                 <input type="text" class="form-control" id="username" name="username" required>
+                                @{
+                                    if (@ViewBag.isUserAlreadyExisted != null
+                                        && @ViewBag.isUserAlreadyExisted)
+                                    {
+                                        <p class="text-danger"> Username has already existed!</p>
+
+                                    }
+                                }
                             </div>
 
                             <div class="row mb-3">
@@ -50,6 +58,16 @@
                                     <label for="confirmPassword" class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                                 </div>
+
+
+                                @{
+                                    if (@ViewBag.isConfirmPasswordMatched != null 
+                                        && !@ViewBag.isConfirmPasswordMatched)
+                                    {
+                                        <p class="text-danger"> Confirmed Password did not match</p>
+
+                                    }
+                                }
                             </div>
 
                             <div class="mb-3">

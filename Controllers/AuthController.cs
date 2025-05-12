@@ -28,7 +28,7 @@ namespace ostad_assignment_03.Controllers
             string lastName = formValues["lastName"].ToString();
             string username = formValues["username"].ToString();
             string role = formValues["role"].ToString();
-            string gender = formValues["role"].ToString();
+            string gender = formValues["gender"].ToString();
             string password = formValues["password"].ToString();
             string confirmPassword = formValues["confirmPassword"].ToString();
 
@@ -40,8 +40,7 @@ namespace ostad_assignment_03.Controllers
             bool isExistingUser = baseMember.ValidateUsername(username);
 
             if (isExistingUser) {
-                ViewBag.isExistingUser = true;
-
+                ViewBag.isUserAlreadyExisted = true;
                 return View();
             }
 
@@ -55,9 +54,11 @@ namespace ostad_assignment_03.Controllers
             int rowCount = baseMember.SaveUser();
 
             if (rowCount > 0) {
+                Session["confirmationMsg"] = "User has successfully registered";
                 return Redirect(Url.Action("UserList", "Dashboard"));
             }
 
+            ViewBag.isUserCreated = false;
             return View();
         }
     }
